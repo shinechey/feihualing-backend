@@ -1,0 +1,26 @@
+{
+  "name": "feihualing-game",
+  "version": "1.0.0",
+  "description": "飞花令古风诗词游戏",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "古风",
+    "诗词",
+    "游戏",
+    "AI",
+    "Vue"
+  ],
+  "author": "甫·其丽格尔",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
