@@ -2,6 +2,21 @@ const COZE_API_KEY = process.env.COZE_API_KEY || 'pat_WR8uH9keNbGqSiwUYmFi4Xvye8
 const COZE_BOT_ID = process.env.COZE_BOT_ID || '7558867777532985384';
 const DEFAULT_USER_ID = 'feihualing-user';
 
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || '*';
+
+const applyCors = (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', ALLOWED_ORIGIN);
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Max-Age', '86400');
+
+  if (req.method && req.method.toUpperCase() === 'OPTIONS') {
+    res.status(204).end();
+    return true;
+  }
+  return false;
+};
+
 const ensurePost = (req, res) => {
   if (req.method && req.method.toUpperCase() !== 'POST') {
     res.status(405).json({ error: 'Method Not Allowed' });
@@ -116,6 +131,7 @@ const parseJsonText = (text) => {
 // --- Handlers ---
 
 const handlePoem = async (req, res) => {
+  if (applyCors(req, res)) return;
   if (!ensurePost(req, res)) return;
   const { keyword = '', used = [], difficulty = 'easy' } = parseBody(req);
 
@@ -170,6 +186,7 @@ const handlePoem = async (req, res) => {
 };
 
 const handleValidate = async (req, res) => {
+  if (applyCors(req, res)) return;
   if (!ensurePost(req, res)) return;
   const { sentence = '', keyword = '' } = parseBody(req);
   const pure = (sentence || '').trim();
@@ -220,6 +237,7 @@ const handleValidate = async (req, res) => {
 };
 
 const handleBackground = async (req, res) => {
+  if (applyCors(req, res)) return;
   if (!ensurePost(req, res)) return;
   const { poem = '', author = '' } = parseBody(req);
   if (!poem) {
