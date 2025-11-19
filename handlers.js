@@ -168,6 +168,7 @@ const handlePoem = async (req, res) => {
       } catch {}
     }
 
+    console.log('[Coze raw]', text);
     return parseJsonText(text || '');
   };
 
