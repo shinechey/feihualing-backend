@@ -168,7 +168,7 @@ const handlePoem = async (req, res) => {
       } catch {}
     }
 
-    console.log('[Coze raw]', text);
+    console.log('[Coze raw]', JSON.stringify(text));
     return parseJsonText(text || '');
   };
 
